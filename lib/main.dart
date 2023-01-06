@@ -5,12 +5,19 @@ void main() {
 }
 
 class MyApp extends StatefulWidget {
-
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return MyAppState();
+  }
 }
-class MyAppState extends State{
+
+class MyAppState extends State<MyApp> {
   var questionindex = 0;
   void answerQuestion() {
-    questionindex = questionindex + 1;
+    setState(() {
+      questionindex = questionindex + 1;
+    });
     print(questionindex);
   }
 
