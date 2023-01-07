@@ -1,6 +1,10 @@
+import 'package:first_app/result.dart';
 import 'package:flutter/material.dart';
 import './question.dart';
 import './answers.dart';
+import 'dart:convert';
+import './quiz.dart';
+import './result.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,6 +20,20 @@ class MyApp extends StatefulWidget {
 
 class MyAppState extends State<MyApp> {
   var questionindex = 0;
+  var questions = [
+    {
+      'questiontext': 'what is your\'s fav colour ?',
+      'answertext': ['Blue', 'Red', 'Black', 'Green'],
+    },
+    {
+      'questiontext': 'what is your\'s fav animal ?',
+      'answertext': ['Tui', 'Rabbit', 'Lion', 'Snake(Amit)'],
+    },
+    {
+      'questiontext': 'what is your\'s Fav Place ?',
+      'answertext': ['Bihar', 'Punjab', 'Gujrat', 'Banglore'],
+    },
+  ];
   void answerQuestion() {
     setState(() {
       questionindex = questionindex + 1;
@@ -24,25 +42,14 @@ class MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    var questions = [
-      'what is your\'s name ?',
-      'what is your\'s fav game ?',
-    ];
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
           title: Text("My App"),
         ),
-        body: Column(
-          children: [
-            Question(
-              questions[questionindex],
-            ),
-           Answer(answerQuestion),
-           Answer(answerQuestion),
-           Answer(answerQuestion),
-          ],
-        ),
+        body: questionindex<questions.length? Quiz(answerQuestion: answerQuestion,questionindex: questionindex,questions:questions)
+     
+        :Result(),
       ),
     );
   }
