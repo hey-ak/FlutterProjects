@@ -2,14 +2,10 @@ import 'package:flutter/material.dart';
 import './question.dart';
 import './answers.dart';
 
-
-  
-
-
 class Quiz extends StatelessWidget {
   final List<Map<String, Object>> questions;
   final int questionindex;
-  final VoidCallback answerQuestion;
+  final Function answerQuestion;
 
   Quiz({this.questions, this.answerQuestion, this.questionindex});
   @override
@@ -19,9 +15,10 @@ class Quiz extends StatelessWidget {
         Question(
           questions[questionindex]['questiontext'] as String,
         ),
-        ...(questions[questionindex]['answertext'] as List<String>).map(
+        ...(questions[questionindex]['answertext'] as List<Map<String, Object>>)
+            .map(
           (answertext) {
-            return Answer(answerQuestion, answertext);
+            return Answer(()=>answerQuestion( answertext['score']), answertext['text']) ;
           },
         )
       ],

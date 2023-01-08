@@ -3,7 +3,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class Answer extends StatelessWidget {
-  final VoidCallback selectHandler;
+  final Function selectHandler;
   final String answertext;
 
   Answer(this.selectHandler, this.answertext);

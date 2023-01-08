@@ -20,21 +20,38 @@ class MyApp extends StatefulWidget {
 
 class MyAppState extends State<MyApp> {
   var questionindex = 0;
+  int totalscore = 0;
   var questions = [
     {
       'questiontext': 'what is your\'s fav colour ?',
-      'answertext': ['Blue', 'Red', 'Black', 'Green'],
+      'answertext': [
+        {'text': 'Blue', 'score': 10},
+        {'text': 'Red', 'score': 5},
+        {'text': 'Green', 'score': 3},
+        {'text': 'White', 'score': 1},
+      ],
     },
     {
       'questiontext': 'what is your\'s fav animal ?',
-      'answertext': ['Tui', 'Rabbit', 'Lion', 'Snake(Amit)'],
+      'answertext': [
+        {'text': 'Rabbit', 'score': 2},
+        {'text': 'Lion', 'score': 8},
+        {'text': 'Amit(snake)', 'score': 12},
+        {'text': 'Tui', 'score': 10},
+      ],
     },
     {
       'questiontext': 'what is your\'s Fav Place ?',
-      'answertext': ['Bihar', 'Punjab', 'Gujrat', 'Banglore'],
+      'answertext': [
+        {'text': 'Bihar', 'score': 1},
+        {'text': 'Punjab', 'score': 5},
+        {'text': 'Gujrat', 'score': 3},
+        {'text': 'Mumbai', 'score': 10},
+      ],
     },
   ];
-  void answerQuestion() {
+  void answerQuestion(int score) {
+    totalscore += score;
     setState(() {
       questionindex = questionindex + 1;
     });
@@ -47,9 +64,12 @@ class MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: Text("My App"),
         ),
-        body: questionindex<questions.length? Quiz(answerQuestion: answerQuestion,questionindex: questionindex,questions:questions)
-     
-        :Result(),
+        body: questionindex < questions.length
+            ? Quiz(
+                answerQuestion: answerQuestion,
+                questionindex: questionindex,
+                questions: questions)
+            : Result(totalscore),
       ),
     );
   }
