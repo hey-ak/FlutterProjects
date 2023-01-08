@@ -21,6 +21,14 @@ class MyApp extends StatefulWidget {
 class MyAppState extends State<MyApp> {
   var questionindex = 0;
   int totalscore = 0;
+
+  void restartQuiz() {
+    setState(() {
+      questionindex = 0;
+      totalscore = 0;
+    });
+  }
+
   var questions = [
     {
       'questiontext': 'what is your\'s fav colour ?',
@@ -69,7 +77,7 @@ class MyAppState extends State<MyApp> {
                 answerQuestion: answerQuestion,
                 questionindex: questionindex,
                 questions: questions)
-            : Result(totalscore),
+            : Result(totalscore,restartQuiz),
       ),
     );
   }
